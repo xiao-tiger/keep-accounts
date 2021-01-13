@@ -14,9 +14,8 @@ function ViewTab(props) {
     return (
         <ul className="nav nav-tabs nav-fill my-4">
             <li className="nav-item">
-                <a
-                    className={generateLinkClass(activeTab, LIST_VIEW)}
-                    href="#" 
+                <span
+                    className={generateLinkClass(activeTab, LIST_VIEW)} 
                     onClick={(e) => {
                         e.preventDefault();
                         onTabChange(LIST_VIEW);
@@ -29,12 +28,11 @@ function ViewTab(props) {
                         icon="ios-paper"
                     />
                     列表模式
-                </a>
+                </span>
             </li>
             <li className="nav-item">
-                <a
+                <span
                     className={generateLinkClass(activeTab, CHART_VIEW)}
-                    href="#"
                     onClick={(e) => {
                         e.preventDefault();
                         onTabChange(CHART_VIEW);
@@ -47,7 +45,7 @@ function ViewTab(props) {
                         icon="ios-pie"
                     />
                     图标模式
-                </a>
+                </span>
             </li> 
         </ul>
     )

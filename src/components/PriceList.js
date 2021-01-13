@@ -28,7 +28,7 @@ function PriceList(props) {
                             {item.price}元
                         </span>
                         <span className="clo-2">{item.data}</span>
-                        <a 
+                        <span
                             className="col-1"
                             role="button"
                             onClick={() => {
@@ -41,8 +41,8 @@ function PriceList(props) {
                                 style={{ backgroundColor: '#28a745', padding: '5px' }}
                                 icon="ios-create-outline"
                             />
-                        </a>
-                        <a 
+                        </span>
+                        <span 
                             className="col-1"
                             role="button"
                             onClick={() => {
@@ -55,13 +55,12 @@ function PriceList(props) {
                                 style={{ backgroundColor: '#dc3545', padding: '5px' }}
                                 icon="ios-close"
                             />
-                        </a>
+                        </span>
                     </li>
                 ))
             }
         </ul>
     )
-
 }
 
 
