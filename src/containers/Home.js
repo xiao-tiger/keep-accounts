@@ -50,8 +50,7 @@ class Home extends React.PureComponent {
     const monthStyle = {margin: '-40px 0 0 60px'}
     let income = 0
     let outcome = 0
-    items.map(item => {
-      console.log(item)
+    items.forEach(item => {
       if (item.category.type === 'income') income += item.price
       if (item.category.type === 'outcome') income -= item.price
     })
