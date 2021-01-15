@@ -4,7 +4,35 @@ import '../App.css'
 import ViewTab from '../components/ViewTab'
 import MonthPicker from '../components/MonthPicker'
 import TotalPrice from '../components/TotalPrice'
+import PriceList from '../components/PriceList'
+import CreateBtn from '../components/CreateBtn'
 
+const items = [
+  {
+    id: 1,
+    title: '理财收入',
+    price: 200,
+    date: '2020-12-2',
+    category: {
+      id: '2',
+      name: '理财',
+      type: 'income',
+      iconName: 'logo-yen'
+    }
+  },
+  {
+    id: 2,
+    title: '理财收入',
+    price: 300,
+    date: '2020-11-2',
+    category: {
+      id: '2',
+      name: '理财',
+      type: 'income',
+      iconName: 'logo-yen'
+    }
+  }
+]
 class Home extends React.PureComponent {
 
   constructor(props) {
@@ -12,13 +40,21 @@ class Home extends React.PureComponent {
     this.state = {
       year: new Date().getFullYear(),
       month: new Date().getMonth() + 1,
-      tab: 'list'
+      tab: 'list',
+      items: items
     }
   }
 
   render() {
-    const { year, month, tab } = this.state
-    const monthStyle = {padding: '0 0 40px 60px', marginTop: '-40px'}
+    const { year, month, tab, items } = this.state
+    const monthStyle = {margin: '-40px 0 0 60px'}
+    let income = 0
+    let outcome = 0
+    items.map(item => {
+      console.log(item)
+      if (item.category.type === 'income') income += item.price
+      if (item.category.type === 'outcome') income -= item.price
+    })
     return (
       <React.Fragment>
         <header className="header-box">
@@ -43,8 +79,8 @@ class Home extends React.PureComponent {
             </div>
             <div className="col">
               <TotalPrice 
-                income={202}
-                outcome={345}
+                income={income}
+                outcome={outcome}
               />
             </div>
           </div>
@@ -59,6 +95,12 @@ class Home extends React.PureComponent {
               })
             }
           }
+        />
+
+        <CreateBtn style={ {marginBottom: '20px'} } onClick={ (e) => {  } } />
+
+        <PriceList 
+          items={items}
         />
       </React.Fragment>
     )

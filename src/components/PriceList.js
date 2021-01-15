@@ -3,9 +3,9 @@ import IonIcons from 'react-ionicons'
 import PropTypes from 'prop-types'
 
 function PriceList(props) {
-  let { items, onModifyItem, onDeleteItem } = props
+  let { items, onModifyItem, onDeleteItem, stlye } = props
   return (
-    <ul className="list-group list-group-flush">
+    <ul className="list-group list-group-flush" style={stlye}>
       {
         items.map(item => (
           <li
