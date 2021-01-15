@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTyps from 'prop-types'
 
 import { padLeft, range } from '../utility'
 
@@ -90,6 +91,18 @@ class MonthPicker extends React.PureComponent {
     })
     this.props.onChangeDate(this.state.selectedYear, month)
   }
+}
+
+MonthPicker.propTyps = {
+  year: PropTyps.number.isRequired,
+  month: PropTyps.number.isRequired,
+  onChangeDate: PropTyps.func.isRequired
+}
+
+MonthPicker.defaultProps = {
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1,
+  onChangeDate: () => {}
 }
 
 

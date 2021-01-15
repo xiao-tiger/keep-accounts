@@ -66,7 +66,7 @@ PriceList.propTypes = {
   items: PropTypes.array.isRequired,
   onModifyItem: PropTypes.func.isRequired,
   onDeleteItem: PropTypes.func.isRequired
-};
+}
 
 PriceList.defaultProps = {
   items: () => [],
