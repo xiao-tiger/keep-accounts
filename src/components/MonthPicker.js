@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createRef } from 'react'
 import PropTyps from 'prop-types'
 
 import { padLeft, range } from '../utility'
@@ -8,11 +8,20 @@ class MonthPicker extends React.PureComponent {
 
   constructor(props) {
     super(props)
+    this.selectYM = createRef()
     this.state = {
       isOpen: false,
       selectedYear: props.year,
       selectedMonth: props.month
     }
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleClick, false)
+  }
+
+  componentWillUnmount() {
+    document.addEventListener('click', this.handleClick, false)
   }
 
   render() {
@@ -21,8 +30,8 @@ class MonthPicker extends React.PureComponent {
     const yearRange = range(9, -4).map(number => number + year)
     const monthRange = range(12, 1)
     return (
-      <div className="dropdown month-picker-component">
-        <h4>选择月份</h4>
+      <div className="dropdown month-picker-component" ref={this.selectYM}>
+        <h5>选择月份</h5>
         <button 
           className="btn btn-lg btn-secondary dropdown-toggle"
           onClick={ e => this.toggleDropdown(e) }
@@ -90,6 +99,14 @@ class MonthPicker extends React.PureComponent {
       isOpen: false
     })
     this.props.onChangeDate(this.state.selectedYear, month)
+  }
+
+  handleClick = (e) => {
+    if (this.selectYM.current.contains(e.target)) return false
+
+    this.setState({
+      isOpen: false
+    })
   }
 }
 
