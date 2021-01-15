@@ -25,12 +25,12 @@ class MonthPicker extends React.PureComponent {
   }
 
   render() {
-    const { year, month } = this.props;
+    const { year, month, style } = this.props;
     const { isOpen, selectedYear, selectedMonth } = this.state
     const yearRange = range(9, -4).map(number => number + year)
     const monthRange = range(12, 1)
     return (
-      <div className="dropdown month-picker-component" ref={this.selectYM}>
+      <div className="dropdown month-picker-component" ref={this.selectYM} style={style}>
         <h5>选择月份</h5>
         <button 
           className="btn btn-lg btn-secondary dropdown-toggle"
