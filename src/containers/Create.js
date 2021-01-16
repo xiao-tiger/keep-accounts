@@ -1,6 +1,7 @@
 import React from 'react'
 import Tabs from '../components/Tabs'
 import PriceForm from '../components/PriceForm'
+import CategorySelect from '../components/CategorySelect'
 
 class Create extends React.PureComponent {
 
@@ -20,7 +21,7 @@ class Create extends React.PureComponent {
           <span>支出</span>
           <span>收入</span>
         </Tabs>
-
+        <CategorySelect categories={[]} />
         <PriceForm />
       </div>
     )
