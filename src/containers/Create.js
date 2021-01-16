@@ -1,14 +1,32 @@
 import React from 'react'
-
+import Tabs from '../components/Tabs'
 
 class Create extends React.PureComponent {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      activeIndex: 0
+    }
+  }
+
   render() {
+    const { activeIndex } = this.state
     return (
       <div>
-        <h4>Create</h4>
+        <Tabs activeIndex={activeIndex} onChangeTab={ index => this.changeTab(index) }>
+          <span>支出</span>
+          <span>收入</span>
+        </Tabs>
       </div>
     )
+  }
+
+  changeTab(index) {
+    this.setState({
+      activeIndex: index
+    })
   }
 }
 
