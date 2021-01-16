@@ -6,13 +6,14 @@ import MonthPicker from '../components/MonthPicker'
 import TotalPrice from '../components/TotalPrice'
 import PriceList from '../components/PriceList'
 import CreateBtn from '../components/CreateBtn'
+import { padLeft } from '../utility'
 
 const items = [
   {
     id: 1,
     title: '理财收入',
     price: 200,
-    date: '2020-12-2',
+    date: '2021-12-02',
     category: {
       id: '2',
       name: '理财',
@@ -24,11 +25,23 @@ const items = [
     id: 2,
     title: '理财收入',
     price: 300,
-    date: '2020-11-2',
+    date: '2021-11-02',
     category: {
       id: '2',
       name: '理财',
       type: 'income',
+      iconName: 'logo-yen'
+    }
+  },
+  {
+    id: 3,
+    title: '理财收入',
+    price: 100,
+    date: '2020-12-02',
+    category: {
+      id: '2',
+      name: '理财',
+      type: 'outcome',
       iconName: 'logo-yen'
     }
   }
@@ -50,9 +63,14 @@ class Home extends React.PureComponent {
     const monthStyle = {margin: '-40px 0 0 60px'}
     let income = 0
     let outcome = 0
-    items.forEach(item => {
+    
+    const newItems = items.filter(item => {
+      return item.date.includes(`${year}-${padLeft(month)}`)
+    })
+
+    newItems.forEach(item => {
       if (item.category.type === 'income') income += item.price
-      if (item.category.type === 'outcome') income -= item.price
+      if (item.category.type === 'outcome') outcome += item.price
     })
     return (
       <React.Fragment>
@@ -66,14 +84,7 @@ class Home extends React.PureComponent {
                 year={year} 
                 month={month}
                 style={monthStyle}
-                onChangeDate={ 
-                  (y, m) => { 
-                    this.setState({
-                      year: y,
-                      month: m
-                    })
-                  }
-                }
+                onChangeDate={ (y, m) => this.changeDate(y, m)}
               />
             </div>
             <div className="col">
@@ -87,23 +98,47 @@ class Home extends React.PureComponent {
 
         <ViewTab 
           activeTab={tab} 
-          onTabChange={
-            (currentTab) => {
-              this.setState({
-                tab: currentTab
-              })
-            }
-          }
+          onTabChange={ currentTab => this.changeView(currentTab) }
         />
 
-        <CreateBtn style={ {marginBottom: '20px'} } onClick={ (e) => {  } } />
+        <CreateBtn style={ {marginBottom: '20px'} } onClick={ e => { this.createItem() } } />
+        { 
+          tab === 'list' &&
+          <PriceList 
+            items={newItems}
+            onModifyItem={ e => this.modifyItem(e) }
+            onDeleteItem={ e => this.deleteItem(e) }
+          />
+        }
 
-        <PriceList 
-          items={items}
-        />
+        {
+          tab === 'chart' && 
+          <h3>图表</h3>
+        }
+
       </React.Fragment>
     )
   }
+
+  changeView(currentTab) {
+    this.setState({
+      tab: currentTab
+    })
+  }
+
+  changeDate(y, m) {
+    this.setState({
+      year: y,
+      month: m
+    })
+  }
+
+  modifyItem() {}
+
+  createItem() {}
+
+  deleteItem() {}
+
 }
 
 export default Home

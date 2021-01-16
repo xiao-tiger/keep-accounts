@@ -25,8 +25,8 @@ function PriceList(props) {
             <span className="col-2 font-weight-bold">
               {(item.category.type === 'income') ? '+' : '-'}
               {item.price}元
-                        </span>
-            <span className="clo-2">{item.data}</span>
+            </span>
+            <span className="clo-2">{item.date}</span>
             <span
               className="col-1"
               role="button"
