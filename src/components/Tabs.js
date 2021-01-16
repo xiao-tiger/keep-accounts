@@ -1,7 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 
 class Tabs extends React.PureComponent {
+
+  static propTypes = {
+    activeIndex: PropTypes.number.isRequired,
+    onChangeTab: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    activeIndex: 0,
+    onChangeTab: () => {}
+  }
 
   render() {
     const { children, onChangeTab, activeIndex } = this.props
